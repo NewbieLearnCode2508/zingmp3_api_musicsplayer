@@ -54,21 +54,39 @@ app.get('/api/stream', async (req, res) => {
 
   try {
     const result = await ZingMp3.getSong(id);
+    console.log('[stream] Zing result:', { err: result?.err, msg: result?.msg, hasData: !!result?.data });
+
     if (result?.err !== 0) {
-      return res.status(502).json({ error: result?.msg || 'Không lấy được dữ liệu phát nhạc' });
+      throw new Error(result?.msg || 'Zing API error');
     }
 
     const streamData = result?.data || {};
     const streamUrl = streamData['128'] || streamData['320'] || null;
 
-    if (!streamUrl || typeof streamUrl !== 'string') {
-      return res.status(404).json({ error: 'Không tìm thấy link phát phù hợp cho bài hát này' });
+    if (!streamUrl) {
+      console.warn('[stream] Zing returned no URL, data keys:', Object.keys(streamData));
+      throw new Error('no stream url from Zing');
     }
 
     return res.json({ success: true, data: { streamUrl } });
-  } catch (error) {
-    console.error('[stream error]', error);
-    return res.status(500).json({ error: 'Có lỗi khi lấy link phát nhạc' });
+  } catch (err) {
+    console.warn('[stream] Zing failed:', err.message);
+
+    // Fallback to iTunes preview (30s)
+    try {
+      const itunesRes = await fetch(`https://itunes.apple.com/lookup?id=${id}`);
+      const itunesData = await itunesRes.json();
+      const track = itunesData?.results?.[0];
+      if (track?.previewUrl) {
+        console.log('[stream] iTunes fallback OK');
+        return res.json({ success: true, data: { streamUrl: track.previewUrl } });
+      }
+      console.warn('[stream] iTunes fallback: no previewUrl');
+    } catch (e) {
+      console.error('[stream] iTunes fallback error:', e);
+    }
+
+    return res.status(502).json({ error: 'Không lấy được link phát (Zing bị chặn/IP khác)' });
   }
 });
 

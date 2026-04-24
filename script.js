@@ -26,7 +26,9 @@ const volumeSlider = document.getElementById('volumeSlider');
 // --- 2. Cấu hình cơ bản ---
 // Nếu mở bằng Live Server (:5500), tự gọi API từ Express server (:3000).
 // Nếu mở trực tiếp từ Express thì giữ đường dẫn tương đối.
-const API_BASE_URL = window.location.port === '3000' ? '' : 'http://localhost:3000';
+const API_BASE_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : '';
 
 let currentSongList = [];      // Mảng lưu danh sách bài hát hiện tại
 let currentSongIndex = 0;      // Chỉ số bài hát đang phát

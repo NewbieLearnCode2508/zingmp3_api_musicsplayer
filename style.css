@@ -1,0 +1,332 @@
+/* style.css - Tạo diện mạo mới mẻ và hiện đại cho ứng dụng */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 52%, #2c5364 100%);
+  background-attachment: fixed;
+  color: #333;
+  padding-bottom: 100px; /* Để tránh player che mất nội dung */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Thanh tìm kiếm */
+.search-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#searchInput {
+  flex: 1;
+  min-width: 250px;
+  padding: 14px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+#searchBtn,
+#showFavoritesBtn,
+#playFavoritesBtn {
+  padding: 14px 20px;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#searchBtn {
+  background-color: #ff6b6b;
+}
+
+#showFavoritesBtn {
+  background-color: #3a86ff;
+}
+
+#playFavoritesBtn {
+  background-color: #00b894;
+}
+
+#searchBtn:hover,
+#showFavoritesBtn:hover,
+#playFavoritesBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.auto-next-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: #1f2937;
+}
+
+.auto-next-toggle input {
+  width: 16px;
+  height: 16px;
+}
+
+/* Khu vực kết quả (list view) */
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.song-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 16px;
+}
+
+.song-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.song-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.song-info {
+  flex: 1;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.song-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.song-title {
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.favorite-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #ef4444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.favorite-btn:hover {
+  background: #fee2e2;
+}
+
+.favorite-btn.active {
+  background: #fee2e2;
+}
+
+.song-artist {
+  color: #777;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.placeholder {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  font-size: 1.2rem;
+  color: #555;
+  grid-column: 1 / -1;
+}
+
+/* Player cố định */
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(30, 30, 40, 0.95);
+  backdrop-filter: blur(12px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  flex-wrap: wrap;
+  gap: 15px;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+}
+
+.player-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.player-meta {
+  overflow: hidden;
+}
+
+#playerTitle {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#playerArtist {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.player-main {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.player-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.player-controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#playBtn {
+  width: 46px;
+  height: 46px;
+  font-size: 1.35rem;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.player-controls button:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.player-progress-wrap {
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+#progressBar {
+  width: 100%;
+  cursor: pointer;
+  accent-color: #ff6b6b;
+}
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+}
+
+#volumeSlider {
+  width: 100px;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .player {
+    flex-direction: column;
+    padding: 12px;
+  }
+
+  .player-info,
+  .player-main,
+  .player-controls,
+  .player-volume {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .player-progress-wrap {
+    grid-template-columns: 42px 1fr 42px;
+  }
+}

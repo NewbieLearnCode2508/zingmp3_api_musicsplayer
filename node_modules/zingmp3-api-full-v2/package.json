@@ -1,0 +1,29 @@
+{
+  "name": "zingmp3-api-full-v2",
+  "version": "1.0.11",
+  "description": "zingmp3-api-full-v2",
+  "main": "dist/index.js",
+  "types": "dist",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hoangak47/zing-api.git"
+  },
+  "keywords": [
+    "zingmp3",
+    "zingmp3-api-full-v2",
+    "zingmp3 api",
+    "api"
+  ],
+  "author": "hoangak47 <nguyenhoang@gmail.com>",
+  "license": "ISC",
+  "scripts": {
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.11",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
+}

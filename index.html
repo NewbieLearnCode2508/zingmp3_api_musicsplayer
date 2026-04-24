@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>Music Box - Nghe nhạc trực tuyến</title>
+    <!-- Font Awesome 6 (miễn phí) để dùng biểu tượng đẹp -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Liên kết đến file CSS của chúng ta -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Thanh tìm kiếm -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Nhập tên bài hát, ca sĩ..."
+        />
+        <button id="searchBtn"><i class="fas fa-search"></i> Tìm kiếm</button>
+        <button id="showFavoritesBtn"><i class="fas fa-heart"></i> Yêu thích</button>
+        <button id="playFavoritesBtn"><i class="fas fa-play"></i> Phát yêu thích</button>
+        <label class="auto-next-toggle">
+          <input type="checkbox" id="autoNextToggle" checked />
+          Tự động chuyển bài
+        </label>
+      </div>
+
+      <!-- Khu vực hiển thị danh sách bài hát -->
+      <div id="results" class="results-container">
+        <!-- Các bài hát sẽ được JavaScript hiển thị ở đây -->
+        <div class="placeholder">
+          ✨ Hãy tìm kiếm bài hát bạn yêu thích nhé!
+        </div>
+      </div>
+    </div>
+
+    <!-- Trình phát nhạc (Player) cố định ở cuối trang -->
+    <div class="player" id="player">
+      <div class="player-info">
+        <img
+          id="playerThumb"
+          src="https://via.placeholder.com/50"
+          alt="thumbnail"
+        />
+        <div class="player-meta">
+          <div id="playerTitle">Chưa có bài hát nào được chọn</div>
+          <div id="playerArtist"></div>
+        </div>
+      </div>
+      <div class="player-main">
+        <div class="player-controls">
+          <button id="prevBtn" title="Bài trước"><i class="fas fa-backward"></i></button>
+          <button id="rewindBtn" title="Tua lùi 5 giây"><i class="fas fa-rotate-left"></i></button>
+          <button id="playBtn" title="Phát/Tạm dừng"><i class="fas fa-play"></i></button>
+          <button id="forwardBtn" title="Tua tới 5 giây"><i class="fas fa-rotate-right"></i></button>
+          <button id="nextBtn" title="Bài tiếp"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="player-progress-wrap">
+          <span id="currentTime">00:00</span>
+          <input type="range" id="progressBar" min="0" max="100" value="0" />
+          <span id="durationTime">00:00</span>
+        </div>
+      </div>
+      <div class="player-volume">
+        <i class="fas fa-volume-up"></i>
+        <input type="range" id="volumeSlider" min="0" max="100" value="70" />
+      </div>
+    </div>
+
+    <!-- Thư viện Axios để gọi API dễ dàng hơn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- File JavaScript chính của chúng ta -->
+    <script src="script.js"></script>
+  </body>
+</html>
